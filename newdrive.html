@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>驾车路线图</title>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=65IqgafElnkDKOhWLizqsYdQ"></script>
+</head>
+<body onLoad="run()">
+<div style="width:100%;height:460px;border:1px solid gray" id="container"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+var map = new BMap.Map("container");
+//map.centerAndZoom(new BMap.Point(116.404, 39.915), 9);
+var stcenter="中国";
+map.centerAndZoom(stcenter,5);
+
+map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
+map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT})); //左上角添加比例尺控件
+
+var place1="";
+var place2="";
+var place3="";
+
+var myGeo = new BMap.Geocoder();
+myGeo.getPoint(place1,function(point){if(point){myplace1=new BMap.Point(point.lng,point.lat);	}},stcenter);
+myGeo.getPoint(place2,function(point){if(point){myplace2=new BMap.Point(point.lng,point.lat);	}},stcenter);
+myGeo.getPoint(place3,function(point){if(point){myplace3=new BMap.Point(point.lng,point.lat);	}},stcenter);
+
+function run(){
+map.clearOverlays();
+var driving = new BMap.DrivingRoute(map);
+driving.search(myplace1,myplace2);
+driving.search(myplace2,myplace3);
+
+driving.setSearchCompleteCallback(function(){
+var pts = driving.getResults().getPlan(0).getRoute(0).getPath();
+
+var polyline = new BMap.Polyline(pts);
+map.addOverlay(polyline);
+map.addOverlay(polyline);
+map.addOverlay(new BMap.Marker(myplace1));
+map.addOverlay(new BMap.Marker(myplace2));
+map.addOverlay(new BMap.Marker(myplace3));
+map.addOverlay(new BMap.Label("起点-"+place1,{position:myplace1}));
+map.addOverlay(new BMap.Label("途经点-"+place2,{position:myplace2}));
+map.addOverlay(new BMap.Label("终点-"+place3,{position:myplace3}));
+
+setTimeout(function(){map.setViewport([myplace1,myplace2,myplace3])},1000);
+});
+}
+</script>

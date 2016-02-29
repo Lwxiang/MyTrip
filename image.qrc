@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>img/icon/add.png</file>
+        <file>img/icon/close.png</file>
+        <file>img/icon/del.png</file>
+        <file>img/icon/dia.png</file>
+        <file>img/icon/end.png</file>
+        <file>img/icon/finishL.png</file>
+        <file>img/icon/go.png</file>
+        <file>img/icon/icons.png</file>
+        <file>img/icon/ins.png</file>
+        <file>img/icon/minsize.png</file>
+        <file>img/icon/newT.png</file>
+        <file>img/icon/not.png</file>
+        <file>img/icon/notL.png</file>
+        <file>img/icon/nowL.png</file>
+        <file>img/icon/nowT.png</file>
+        <file>img/icon/openpho.png</file>
+        <file>img/icon/pastT.png</file>
+        <file>img/icon/pen.png</file>
+        <file>img/icon/pho.png</file>
+        <file>img/icon/setout.png</file>
+        <file>img/icon/waitL.png</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file>img/bg/KG.jpg</file>
+        <file>img/bg/phoBG.jpg</file>
+        <file>img/bg/screen.png</file>
+        <file>myappico.ico</file>
+    </qresource>
+</RCC>
